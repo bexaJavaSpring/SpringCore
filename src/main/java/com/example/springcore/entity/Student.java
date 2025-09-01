@@ -9,8 +9,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor  // -->> Hamma constructorlarni yaratish
 @NoArgsConstructor   // -->> bo'sh constructor yaratish annotatsiya bilan'
 @Data                // -->> @Getter, @Setter va @ToString annotasiyalarni birlashmasi
-@Getter             // -->> getter methodlarni yaratish
-@Setter             // -->> setter methodlarni yaratish
+//@Getter             // -->> getter methodlarni yaratish
+//@Setter             // -->> setter methodlarni yaratish
 @Entity             // -->> Class ni bean qiladi va shu class ni database table ga o'giradi
 @Table(name = "students")             // -->> database dagi table nomini custom qilib yozsa bo'ladi
 @FieldDefaults(level = AccessLevel.PRIVATE)  // -->> shu class dagi barcha field larni private qiladi
