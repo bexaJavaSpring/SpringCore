@@ -68,7 +68,8 @@ public class FacultyService {
     public String update(Integer facultyId, FacultyRequest request) {
         Faculty faculty = repository.findById(facultyId).orElseThrow(() -> new RuntimeException("Faculty not found"));
         faculty.setName(request.getName());
-        faculty.setAddress(request.getAddress());
+        if (request.getAddress() != null)
+            faculty.setAddress(request.getAddress());
         repository.save(faculty);
         return "Successfully updated";
     }
