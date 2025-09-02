@@ -36,9 +36,14 @@ public class FacultyService {
     }
 
     public Integer create(FacultyRequest request) {
-        Faculty faculty = new Faculty();
-        faculty.setName(request.getName());
-        faculty.setAddress(request.getAddress());
+//        Faculty faculty = new Faculty();
+//        faculty.setName(request.getName());
+//        faculty.setAddress(request.getAddress());
+        Faculty faculty = Faculty.builder()
+                .name(request.getName())
+                .address(request.getAddress())
+                .build();
+
         Faculty newFaculty = repository.save(faculty);
         return newFaculty.getId();
     }
@@ -58,5 +63,19 @@ public class FacultyService {
             throw new RuntimeException("Faculty not found");
         }
         return mapper.toDto(faculty);
+    }
+
+    public String update(Integer facultyId, FacultyRequest request) {
+        Faculty faculty = repository.findById(facultyId).orElseThrow(() -> new RuntimeException("Faculty not found"));
+        faculty.setName(request.getName());
+        faculty.setAddress(request.getAddress());
+        repository.save(faculty);
+        return "Successfully updated";
+    }
+
+    public Boolean delete(Integer facultyId) {
+        repository.findById(facultyId).orElseThrow(() -> new RuntimeException("Faculty not found"));
+        repository.deleteById(facultyId);
+        return true;
     }
 }
