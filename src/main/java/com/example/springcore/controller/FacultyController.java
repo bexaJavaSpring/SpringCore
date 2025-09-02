@@ -2,10 +2,8 @@ package com.example.springcore.controller;
 
 import com.example.springcore.dto.req.FacultyRequest;
 import com.example.springcore.dto.res.FacultyResponse;
-import com.example.springcore.entity.Faculty;
 import com.example.springcore.service.FacultyService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
