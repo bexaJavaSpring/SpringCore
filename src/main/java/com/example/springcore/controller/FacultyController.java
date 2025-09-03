@@ -20,12 +20,12 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<FacultyResponse>> getAll() {
         return new ResponseEntity<>(facultyService.getAll(), HttpStatus.CREATED);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Integer> create(@RequestBody @Valid FacultyRequest request){
         return ResponseEntity.ok(facultyService.create(request));
     }
@@ -38,5 +38,15 @@ public class FacultyController {
     @PostMapping("/get-by-name")
     public ResponseEntity<FacultyResponse> getByName(@RequestParam("name") String name){
         return ResponseEntity.ok(facultyService.getByName(name));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable("id") Integer facultyId, @RequestBody FacultyRequest request){
+        return ResponseEntity.ok(facultyService.update(facultyId, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer facultyId){
+        return ResponseEntity.ok(facultyService.delete(facultyId));
     }
 }
