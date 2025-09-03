@@ -13,7 +13,6 @@ import java.util.List;
 @RestController     // = @ResponseBody + @Controller
 @RequestMapping("/faculty")
 public class FacultyController {
-
     private final FacultyService facultyService;
 
     public FacultyController(FacultyService facultyService) {
@@ -22,7 +21,7 @@ public class FacultyController {
 
     @GetMapping()
     public ResponseEntity<List<FacultyResponse>> getAll() {
-        return new ResponseEntity<>(facultyService.getAll(), HttpStatus.CREATED);
+        return new ResponseEntity<>(facultyService.getAll(), HttpStatus.CREATED); // nega bu yerda faqat new ResponseEntity??
     }
 
     @PostMapping
