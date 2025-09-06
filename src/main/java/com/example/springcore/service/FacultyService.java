@@ -3,6 +3,7 @@ package com.example.springcore.service;
 import com.example.springcore.dto.req.FacultyRequest;
 import com.example.springcore.dto.res.FacultyResponse;
 import com.example.springcore.entity.Faculty;
+import com.example.springcore.exception.GenericNotFoundException;
 import com.example.springcore.mapper.FacultyMapper;
 import com.example.springcore.repository.FacultyRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,7 @@ public class FacultyService {
     public FacultyResponse getById(Integer facultyId) {
         Optional<Faculty> optionalFaculty = repository.findById(facultyId);
         if (!optionalFaculty.isPresent()) {
-            throw new RuntimeException("Faculty not found");
+            throw new GenericNotFoundException("Faculty not found");
         }
         Faculty faculty = optionalFaculty.get();
         return mapper.toDto(faculty);
