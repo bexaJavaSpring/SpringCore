@@ -1,47 +1,28 @@
 package com.example.springcore.controller;
 
-
 import com.example.springcore.dto.req.StudentRequest;
-import com.example.springcore.dto.res.FacultyResponse;
-import com.example.springcore.dto.res.StudentResponse;
-import com.example.springcore.entity.Student;
 import com.example.springcore.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/student")
 public class StudentController {
-  StudentService studentService;
 
+    private StudentService service;
 
-  public StudentController(StudentService studentService) {
-    this.studentService = studentService;
-  }
+    public void setStudentService(StudentService service) {
+        this.service = service;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<StudentResponse>> getStudents(){
-    return new ResponseEntity<>(studentService.getAll(), HttpStatus.CREATED);
-  }
-
-  @GetMapping("/{id}")
-  public ResponseEntity<StudentResponse> getStudentById(@PathVariable Integer id){
-    return ResponseEntity.ok(studentService.getById(id));
-  }
-
-  @GetMapping("/faculty-name")
-  public ResponseEntity<List<StudentResponse>> getFacultyNames(@RequestParam("facultyName") String facultyName){
-    return new ResponseEntity<>(studentService.findByFacultyName(facultyName), HttpStatus.OK);
-  };
-
-  @PostMapping()
-  public ResponseEntity<Integer> saveStudent(@RequestBody @Valid StudentRequest studentRequest){
-    return  ResponseEntity.ok(studentService.create(studentRequest));
-  }
+    @RequestMapping(value = "/student", method = RequestMethod.POST)
+    public ResponseEntity<Integer> create(@RequestBody @Valid StudentRequest request) {
+        return new ResponseEntity<>(service.create(request), HttpStatus.CREATED);
+    }
 
 
 }

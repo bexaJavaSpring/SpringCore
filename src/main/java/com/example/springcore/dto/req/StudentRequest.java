@@ -1,25 +1,23 @@
 package com.example.springcore.dto.req;
 
-import com.example.springcore.entity.Faculty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class StudentRequest {
-  @NotNull
-  private String firstName;
-  @NotNull
-  private String lastName;
-  @NotNull
-  private String email;
-  @NotNull
-  private Integer age;
-  private String middleName;
-  @NotNull
-  private Faculty faculty;
+    String firstName;
+    String lastName;
+    //    @Schema(hidden = true)
+    String email;
+    Integer age;
+    String middleName;
+    @NotNull(message = "faculty is must not be null")
+    Integer facultyId;
 }
