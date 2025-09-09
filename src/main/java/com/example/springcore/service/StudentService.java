@@ -19,12 +19,13 @@ public class StudentService {
     }
 
     public Integer create(StudentRequest request) {
-        Student student = new Student();
-        student.setEmail(request.getEmail());
-        student.setFirstName(request.getFirstName());
-        student.setLastName(request.getLastName());
-        student.setMiddleName(request.getMiddleName());
-        student.setAge(request.getAge());
+        Student student = Student.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .age(request.getAge())
+                .email(request.getEmail())
+                .middleName(request.getMiddleName())
+                .build();
 //        facultyRepository.getReferenceById(request.getFacultyId());
         Faculty faculty = facultyRepository.findByIdCustom(request.getFacultyId());
         if (faculty == null) {

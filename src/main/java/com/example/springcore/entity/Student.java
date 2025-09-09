@@ -14,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 @Entity             // -->> Class ni bean qiladi va shu class ni database table ga o'giradi
 @Table(name = "students")             // -->> database dagi table nomini custom qilib yozsa bo'ladi
 @FieldDefaults(level = AccessLevel.PRIVATE)  // -->> shu class dagi barcha field larni private qiladi
+@Builder
 public class Student {
     @Id        // -->> shu class yani table ni id sini primary key qiladi
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // -->> id ni ozi generatsiya qiladi, sequence yozib boradi
