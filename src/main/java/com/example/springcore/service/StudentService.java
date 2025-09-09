@@ -22,7 +22,7 @@ public class StudentService {
   }
 
   public StudentResponse getById(Integer studentId) {
-    Optional<Student> optionalStudent = studentRepository.findById(studentId);
+    Optional<Student> optionalStudent = studentRepository.findByFirstName();
     if (!optionalStudent.isPresent()) {
       throw new RuntimeException("Student not found");
     }
