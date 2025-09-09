@@ -10,19 +10,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
 
 public class UniversityService {
-  private final UniversityRepository universityRepository;
-  private final UniversityMapper universityMapper;
+    private final UniversityRepository universityRepository;
+    private final UniversityMapper universityMapper;
 
 
-  public List<UniversityResponse> getAll() {
-    return universityRepository.findAll().stream().map(universityMapper::toDTO).toList();
-  }
+    public List<UniversityResponse> getAll() {
+        return universityRepository.findAll().stream().map(universityMapper::toDTO).toList();
+    }
 
 //  public Integer createUniver(String name, String address) {
 //     University university = University.builder()
@@ -34,20 +34,23 @@ public class UniversityService {
 //     return university.getId();
 //  }
 
-  public Integer createUniver(UniversityRequest universityRequest) {
-    University university = new University();
-    university.setName(universityRequest.getName());
-    university.setAddress(universityRequest.getAddress());
-    universityRepository.save(university);
-    return university.getId();
-  }
+    public Integer createUniver(UniversityRequest universityRequest) {
+        University university = new University();
+        university.setName(universityRequest.getName());
+        university.setAddress(universityRequest.getAddress());
+        universityRepository.save(university);
+        return university.getId();
+    }
 
-  public Integer updateUniver(Integer id, UniversityRequest universityRequest) {
+    public Integer updateUniver(Integer id, UniversityRequest request) {
 //    Optional<University> university = universityRepository.findById(id);
-    University university = universityRepository.findById(id).orElseThrow(() -> new GenericNotFoundException("University not found"));
-    university.setName(universityRequest.getName());
-    university.setAddress(universityRequest.getAddress());
-    universityRepository.save(university);
-    return university.getId();
-  }
+        University university = universityRepository.findById(id).orElseThrow(() -> new GenericNotFoundException("University not found"));
+        if (!Objects.isNull(request.getName()))
+            university.setName(request.getName());
+
+        university.setAddress(request.getAddress() != null ?
+                request.getAddress() : university.getAddress());
+        universityRepository.save(university);
+        return university.getId();
+    }
 }

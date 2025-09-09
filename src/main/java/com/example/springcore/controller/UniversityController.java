@@ -3,6 +3,7 @@ package com.example.springcore.controller;
 import com.example.springcore.dto.req.UniversityRequest;
 import com.example.springcore.dto.res.UniversityResponse;
 import com.example.springcore.service.UniversityService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UniversityController {
 //  public ResponseEntity<Integer> createUniversity(@RequestParam String name, @RequestParam String address) {
 //    return ResponseEntity.ok(universityService.createUniver(name, address));
 //  }
-  public ResponseEntity<Integer> createUniversity(@RequestBody UniversityRequest universityRequest) {
+  public ResponseEntity<Integer> createUniversity(@RequestBody @Valid UniversityRequest universityRequest) {
     return ResponseEntity.ok(universityService.createUniver(universityRequest));
   }
 

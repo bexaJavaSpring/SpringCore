@@ -20,7 +20,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(GenericNotFoundException.class)
-    public final ResponseEntity<Object> handleGenericNotFoundException(Exception ex) {
+    public final ResponseEntity<Object> handleGenericNotFoundException(GenericNotFoundException ex) {
         String message = getLastCause(ex);
         log.error(message, ex);
         return new ResponseEntity<>(new ResponseDto<>(ResponseDto.States.ERROR, 404, message), HttpStatus.NOT_FOUND);
