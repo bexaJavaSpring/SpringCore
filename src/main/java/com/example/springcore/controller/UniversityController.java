@@ -15,25 +15,25 @@ import java.util.List;
 @RequestMapping("/university")
 @RequiredArgsConstructor
 public class UniversityController {
-  private final UniversityService universityService;
+    private final UniversityService universityService;
 
-  @GetMapping
-  public ResponseEntity<List<UniversityResponse>> getAllUniversity() {
-    return new ResponseEntity<>(universityService.getAll(), HttpStatus.OK);
-  }
+    @GetMapping
+    public ResponseEntity<List<UniversityResponse>> getAllUniversity() {
+        return new ResponseEntity<>(universityService.getAll(), HttpStatus.OK);
+    }
 
-  @PostMapping
+    @PostMapping
 //  public ResponseEntity<Integer> createUniversity(@RequestParam String name, @RequestParam String address) {
 //    return ResponseEntity.ok(universityService.createUniver(name, address));
 //  }
-  public ResponseEntity<Integer> createUniversity(@RequestBody @Valid UniversityRequest universityRequest) {
-    return ResponseEntity.ok(universityService.createUniver(universityRequest));
-  }
+    public ResponseEntity<Integer> createUniversity(@RequestBody @Valid UniversityRequest universityRequest) {
+        return ResponseEntity.ok(universityService.createUniver(universityRequest));
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<?> updateUniversity(@PathVariable Integer id, @RequestBody UniversityRequest universityRequest) {
-    return ResponseEntity.ok(universityService.updateUniver(id, universityRequest));
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUniversity(@PathVariable Integer id, @RequestBody UniversityRequest universityRequest) {
+        return ResponseEntity.ok(universityService.updateUniver(id, universityRequest));
+    }
 
 
 }
