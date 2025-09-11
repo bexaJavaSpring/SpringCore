@@ -1,5 +1,6 @@
 package com.example.springcore.controller;
 
+import com.example.springcore.dto.filter.FacultyFilter;
 import com.example.springcore.dto.req.FacultyRequest;
 import com.example.springcore.dto.res.FacultyResponse;
 import com.example.springcore.service.FacultyService;
@@ -28,6 +29,11 @@ public class FacultyController {
     @GetMapping()
     public ResponseEntity<List<FacultyResponse>> getAll() {
         return new ResponseEntity<>(facultyService.getAll(), HttpStatus.CREATED); // nega bu yerda faqat new ResponseEntity??
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<List<FacultyResponse>> allByFilter(@RequestBody FacultyFilter filter) {
+        return ResponseEntity.ok(facultyService.allByFilter(filter));
     }
 
     @PostMapping

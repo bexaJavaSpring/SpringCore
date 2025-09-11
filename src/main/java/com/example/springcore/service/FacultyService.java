@@ -1,12 +1,17 @@
 package com.example.springcore.service;
 
+import com.example.springcore.dto.filter.FacultyFilter;
 import com.example.springcore.dto.req.FacultyRequest;
 import com.example.springcore.dto.res.FacultyResponse;
 import com.example.springcore.entity.Faculty;
 import com.example.springcore.exception.GenericNotFoundException;
 import com.example.springcore.mapper.FacultyMapper;
 import com.example.springcore.repository.FacultyRepository;
+import com.example.springcore.specification.FacultySpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -79,5 +84,14 @@ public class FacultyService {
         repository.findById(facultyId).orElseThrow(() -> new RuntimeException("Faculty not found"));
         repository.deleteById(facultyId);
         return true;
+    }
+
+    public List<FacultyResponse> allByFilter(FacultyFilter filter) {
+        Page<Faculty> all = repository.findAll(new FacultySpecification(filter),
+                PageRequest.of(filter.getPage() != null ? filter.getPage() : 0, filter.getLimit() != null ? filter.getLimit() : 10,
+                        Sort.by(Sort.Direction.ASC, filter.getSortBy() != null ? filter.getSortBy() : "id")));
+        List<Faculty> list = all.getContent();
+//        List<Faculty> list = all.stream().toList();
+        return mapper.toDto(list);
     }
 }
