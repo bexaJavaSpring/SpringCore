@@ -11,4 +11,5 @@ public class FacultyFilter extends BaseFilter {
     private String name;
     private String address;
     private Integer universityId;
+    private String universityName;
 }

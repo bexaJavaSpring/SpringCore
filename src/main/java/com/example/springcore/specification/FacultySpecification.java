@@ -2,10 +2,8 @@ package com.example.springcore.specification;
 
 import com.example.springcore.dto.filter.FacultyFilter;
 import com.example.springcore.entity.Faculty;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import com.example.springcore.entity.University;
+import jakarta.persistence.criteria.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -28,6 +26,11 @@ public class FacultySpecification implements Specification<Faculty> {
         }
         if (filter.getUniversityId() != null) {
             predicates.add(criteriaBuilder.equal(root.get("university").get("id"), filter.getUniversityId()));
+        }
+        if (filter.getUniversityName() != null) {
+            Join<University, Faculty> join = root.join("university", JoinType.INNER);
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(join.get("name")),
+                    "%" + filter.getUniversityName().toLowerCase() + "%"));
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

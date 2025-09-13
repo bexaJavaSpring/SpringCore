@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,17 +13,17 @@ import java.util.List;
 @Table(name = "faculties")
 @Builder
 public class Faculty {
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-     private String name;
+    private String name;
 
-     @Column(unique = true)
+    @Column(unique = true)
 //     private String address1;  agar nomi bunday bolsa @mapping ishlatamiz
-     private String address;
+    private String address;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "university_id", nullable = false, referencedColumnName = "id")
-  University university;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "university_id", nullable = false, referencedColumnName = "id")
+    private University university;
 }
