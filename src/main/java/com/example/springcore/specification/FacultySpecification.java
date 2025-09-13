@@ -31,6 +31,9 @@ public class FacultySpecification implements Specification<Faculty> {
             Join<University, Faculty> join = root.join("university", JoinType.INNER);
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(join.get("name")),
                     "%" + filter.getUniversityName().toLowerCase() + "%"));
+
+//            String sql = "select * from faculties f inner join universities u on u.id = f.university_id" +
+//                    " where lower(u.name) like ('%'+(:universityName)+'%') ";
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
