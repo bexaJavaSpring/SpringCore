@@ -14,4 +14,6 @@ public interface FacultyMapper {
     FacultyResponse toDto(Faculty faculty);
 
     List<FacultyResponse> toDto(List<Faculty> list);
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.springcore.controller;
 
+import com.example.springcore.dto.filter.UniversityFilter;
 import com.example.springcore.dto.req.UniversityRequest;
 import com.example.springcore.dto.res.UniversityResponse;
 import com.example.springcore.service.UniversityService;
@@ -20,6 +21,12 @@ public class UniversityController {
     @GetMapping
     public ResponseEntity<List<UniversityResponse>> getAllUniversity() {
         return new ResponseEntity<>(universityService.getAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<List<UniversityResponse>> allByFilter(@RequestBody UniversityFilter universityFilter) {
+      return ResponseEntity.ok(universityService.allByFilter(universityFilter));
+
     }
 
     @PostMapping

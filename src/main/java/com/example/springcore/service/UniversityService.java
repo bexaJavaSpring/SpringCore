@@ -1,12 +1,17 @@
 package com.example.springcore.service;
 
+import com.example.springcore.dto.filter.UniversityFilter;
 import com.example.springcore.dto.req.UniversityRequest;
 import com.example.springcore.dto.res.UniversityResponse;
 import com.example.springcore.entity.University;
 import com.example.springcore.exception.GenericNotFoundException;
 import com.example.springcore.mapper.UniversityMapper;
 import com.example.springcore.repository.UniversityRepository;
+import com.example.springcore.specification.UniversitySpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,4 +58,13 @@ public class UniversityService {
         universityRepository.save(university);
         return university.getId();
     }
+
+  public List<UniversityResponse> allByFilter(UniversityFilter universityFilter) {
+    Page<University> all = universityRepository.findAll(new UniversitySpecification(universityFilter),
+            PageRequest.of(universityFilter.getPage() != null ? universityFilter.getPage() : 0,
+                    universityFilter.getLimit() != null ? universityFilter.getLimit() : 20,
+                    Sort.by(Sort.Direction.ASC, universityFilter.getSortBy() != null ? universityFilter.getSortBy() : "id")));
+    List<University> list = all.getContent();
+    return list.stream().map(universityMapper::toDTO).toList();
+  }
 }
