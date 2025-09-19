@@ -28,7 +28,7 @@ public class FacultyController {
 
     @GetMapping()
     public ResponseEntity<List<FacultyResponse>> getAll() {
-        return new ResponseEntity<>(facultyService.getAll(), HttpStatus.CREATED); // nega bu yerda faqat new ResponseEntity??
+        return new ResponseEntity<>(facultyService.getAll(), HttpStatus.OK); // nega bu yerda faqat new ResponseEntity??
     }
 
     @PostMapping("/filter")
@@ -39,7 +39,7 @@ public class FacultyController {
     @PostMapping
     @Operation(description = "bu api facultetni yaratadi")
     public ResponseEntity<Integer> create(@RequestBody @Valid FacultyRequest request){
-        return ResponseEntity.ok(facultyService.create(request));
+        return new ResponseEntity<>(facultyService.create(request), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.example.springcore.dto.res;
 
+import com.example.springcore.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +14,5 @@ public class UniversityResponse {
 
   Integer id;
   String name;
-  String address;
+  Address address;
 }

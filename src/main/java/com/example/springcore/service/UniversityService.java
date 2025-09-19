@@ -3,6 +3,7 @@ package com.example.springcore.service;
 import com.example.springcore.dto.filter.UniversityFilter;
 import com.example.springcore.dto.req.UniversityRequest;
 import com.example.springcore.dto.res.UniversityResponse;
+import com.example.springcore.entity.Address;
 import com.example.springcore.entity.University;
 import com.example.springcore.exception.GenericNotFoundException;
 import com.example.springcore.mapper.UniversityMapper;
@@ -42,7 +43,7 @@ public class UniversityService {
     public Integer createUniver(UniversityRequest universityRequest) {
         University university = new University();
         university.setName(universityRequest.getName());
-        university.setAddress(universityRequest.getAddress());
+        university.setAddress(new Address());
         universityRepository.save(university);
         return university.getId();
     }
@@ -53,18 +54,16 @@ public class UniversityService {
         if (!Objects.isNull(request.getName()))
             university.setName(request.getName());
 
-        university.setAddress(request.getAddress() != null ?
-                request.getAddress() : university.getAddress());
         universityRepository.save(university);
         return university.getId();
     }
 
-  public List<UniversityResponse> allByFilter(UniversityFilter universityFilter) {
-    Page<University> all = universityRepository.findAll(new UniversitySpecification(universityFilter),
-            PageRequest.of(universityFilter.getPage() != null ? universityFilter.getPage() : 0,
-                    universityFilter.getLimit() != null ? universityFilter.getLimit() : 20,
-                    Sort.by(Sort.Direction.ASC, universityFilter.getSortBy() != null ? universityFilter.getSortBy() : "id")));
-    List<University> list = all.getContent();
-    return list.stream().map(universityMapper::toDTO).toList();
-  }
+    public List<UniversityResponse> allByFilter(UniversityFilter universityFilter) {
+        Page<University> all = universityRepository.findAll(new UniversitySpecification(universityFilter),
+                PageRequest.of(universityFilter.getPage() != null ? universityFilter.getPage() : 0,
+                        universityFilter.getLimit() != null ? universityFilter.getLimit() : 20,
+                        Sort.by(Sort.Direction.ASC, universityFilter.getSortBy() != null ? universityFilter.getSortBy() : "id")));
+        List<University> list = all.getContent();
+        return list.stream().map(universityMapper::toDTO).toList();
+    }
 }
