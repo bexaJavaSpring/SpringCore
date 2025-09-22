@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
+
 @AllArgsConstructor  // -->> Hamma constructorlarni yaratish
 @NoArgsConstructor   // -->> bo'sh constructor yaratish annotatsiya bilan'
 @Data                // -->> @Getter, @Setter va @ToString annotasiyalarni birlashmasi
@@ -42,5 +44,12 @@ public class Student {
     // ichida qanaqa sozlamalar qilsak bunda ham qilsa bo'lsa va shu field
     // bilan boglanish hosil qiladi va qaysidir column bilan va yana foreing key hosil qip beradi, check constraint lar ham qiladi
     Faculty faculty;
+
+
+//    @ManyToOne(fetch = FetchType.EAGER)  biderictional davomi
+//    Faculty faculty;
+
+//    faculty table parent
+//    student - child
 
 }

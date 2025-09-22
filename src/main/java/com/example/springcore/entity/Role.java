@@ -19,4 +19,10 @@ public class Role {
     private String name;
 
     private String code;
+
+//    @ManyToMany(fetch = FetchType.EAGER)    //Biderictional davomi
+//    @JoinTable(name = "user_roles",
+//            joinColumns = @JoinColumn(name = "role_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private Set<User> userSet;
 }

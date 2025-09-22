@@ -26,4 +26,12 @@ public class Faculty {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id", nullable = false, referencedColumnName = "id")
     private University university;
+
+//    @OneToMany(fetch = FetchType.EAGER)  // uniderictional
+//    private Set<Student> students;
+
+
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "faculty")
+//    @JoinColumn(name = "faculty_id")                  // biderictional
+//    private Set<Student> students;
 }
