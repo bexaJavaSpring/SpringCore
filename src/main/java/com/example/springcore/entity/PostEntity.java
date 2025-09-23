@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -25,7 +26,8 @@ public class PostEntity {
     @Column(name = "created_date")
     private LocalDateTime createdDateTime;
 
-    @OneToMany(mappedBy = "post")
-    private List<CommentEntity> comments;
+    @OneToMany(mappedBy = "post", /* cascade = CascadeType.PERSIST cascade = CascadeType.MERGE cascade = CascadeType.REMOVE*/
+    cascade = CascadeType.DETACH)
+    private List<CommentEntity> comments = new ArrayList<>();
 
 }

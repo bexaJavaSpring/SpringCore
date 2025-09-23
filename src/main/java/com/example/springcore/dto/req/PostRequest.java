@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class PostRequest {
-    private String content;
+    private String postContent;
+    private String commentContent;
     private String title;
     private LocalDateTime createdDateTime;
 }

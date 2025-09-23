@@ -27,6 +27,6 @@ public class CommentEntity {
     private LocalDateTime createdDateTime;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id", nullable = false)
     private PostEntity post;
 }
